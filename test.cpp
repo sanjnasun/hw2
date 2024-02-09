@@ -1,4 +1,9 @@
 #include <iostream>
+#include <cassert> 
+#include "util.h"
+using namespace std;
+
+#include <iostream>
 #include <sstream>
 #include <cctype>
 #include <algorithm>
@@ -85,4 +90,13 @@ std::string &rtrim(std::string &s) {
 // trim from both ends
 std::string &trim(std::string &s) {
     return ltrim(rtrim(s));
+}
+
+
+
+int main(){
+    std::set<std::string> strings = parseStringToWords("Jo'es ha-ed bye");
+    for(std::string x: strings){
+        std::cout << x << std::endl;
+    }
 }
