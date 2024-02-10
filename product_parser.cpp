@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include "product_parser.h"
+#include "product.h" 
 #include "book.h"
 #include "clothing.h"
 #include "movie.h"
@@ -130,7 +131,15 @@ std::string ProductBookParser::categoryID()
  */
 Product* ProductBookParser::makeProduct()
 {
+//make a new productbookparser object, no need to make a new book product
+//set each of the products into someting to offically make the product
+//returns a product pointer, 
+//does it need to be fiend. wait no it doesnt'
+Book* item = new Book(categoryID(), prodName_, price_, qty_, author_, isbn_);
+return item;
 
+//make a new produce, set the it equal to the book item, some kind of deep copy
+//return that product?
 
 }
 
@@ -185,7 +194,8 @@ std::string ProductClothingParser::categoryID()
  */
 Product* ProductClothingParser::makeProduct()
 {
-
+Clothing* item = new Clothing(categoryID(), prodName_, price_, qty_, size_, brand_);
+return item;
 
 
 }
@@ -245,6 +255,7 @@ std::string ProductMovieParser::categoryID()
  */
 Product* ProductMovieParser::makeProduct()
 {
-
+Movie* item = new Movie(categoryID(), prodName_, price_, qty_, genre_, rating_);
+return item;
 
 }

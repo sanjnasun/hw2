@@ -6,9 +6,14 @@
 #include <iomanip>
 #include <algorithm>
 #include "product.h"
+#include "mydatastore.h"
 #include "db_parser.h"
 #include "product_parser.h"
 #include "util.h"
+
+
+
+
 
 using namespace std;
 struct ProdNameSorter {
@@ -29,7 +34,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
+    MyDataStore ds;
 
 
 
@@ -101,7 +106,41 @@ int main(int argc, char* argv[])
             }
 	    /* Add support for other commands here */
 
+        else if (cmd == "ADD")
+        {
+            //assuming cart is a queue
+            //string username, hits already made. 
+            
+            //add a cetain hit number to their cart
+            //map, a string and then queue for the products
+            //access outside vector, add that index
+            string username;
+            int hitIndex;
+            if (ss >> username >> hitIndex) {
+                username = convToLower(username); 
+                ds.addToCart(username, hits[hitIndex - 1]); // Call addToCart on the ds object
+            }
+        }
 
+       
+        else if(cmd == "VIEWCART")
+        {
+            string username;
+            if (ss >> username) {
+                username = convToLower(username); 
+                ds.viewCart(username);
+            }
+        }
+        else if(cmd == "BUYCART")
+        {
+            string username;
+            if (ss >> username) {
+                username = convToLower(username); 
+                ds.buyCart(username);
+            } else {
+                cout << "Invalid username" << endl;
+            }
+}
 
 
             else {
@@ -112,6 +151,9 @@ int main(int argc, char* argv[])
     }
     return 0;
 }
+
+
+
 
 void displayProducts(vector<Product*>& hits)
 {
